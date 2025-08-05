@@ -1,8 +1,9 @@
-import { Typography } from "@mui/material";
-import ToDoItem from "../../molecules/to-do-item";
+import './tab-pannel.css'
 import { FC } from "react";
 import { FilterParam, ToDo } from "@/app/types/types";
 import { useTodoStore } from "@/app/store/use-to-do-store";
+import { Typography } from "@mui/material";
+import ToDoItem from "../../molecules/to-do-item";
 
 export interface ITabPanel {
     value: number
@@ -30,13 +31,7 @@ const TabPanel: FC<ITabPanel> = ({
         if (value !== index) return null
 
         return (
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '16px'
-                }}
-            >
+            <div className="o-tab-pannel">
                 {list.length ? (
                     list.map(item => (
                         <ToDoItem
@@ -47,7 +42,13 @@ const TabPanel: FC<ITabPanel> = ({
                         />
                     ))
                 ) : (
-                    <Typography variant="h5">There are no items</Typography>
+                    <Typography
+                        variant="h5"
+                        sx={{ margin: '64px auto' }}
+                        color="textDisabled"
+                    >
+                        There are no items
+                    </Typography>
                 )}
             </div>
         );

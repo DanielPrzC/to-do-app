@@ -3,7 +3,7 @@ import React, { FC, SyntheticEvent, useState } from 'react'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import { FilterParam } from '@/app/types/types'
-import TabPanel from '../tab-panel'
+import TabPannel from '../tab-pannel'
 import { useTodoStore } from '@/app/store/use-to-do-store'
 
 const ToDoBoard: FC = () => {
@@ -49,7 +49,7 @@ const ToDoBoard: FC = () => {
             </Tabs>
             {tabsConfig.map(tab => {
                 return (
-                    <TabPanel key={tab.id} value={tabValue} items={toDos} {...tab} />
+                    <TabPannel key={tab.id} value={tabValue} items={toDos} {...tab} />
                 )
             })}
         </>
