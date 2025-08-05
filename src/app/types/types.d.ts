@@ -7,4 +7,4 @@ export type ToDo = {
 
 export type Task = Pick<ToDo, 'title' | 'description' | 'isComplete'>
 
-export type FilterParam = keyof Pick<ToDo, 'title' | 'description' | 'isComplete'>;
+export type FilterParam = keyof Pick<ToDo, 'title' | 'description' | 'isComplete'>
