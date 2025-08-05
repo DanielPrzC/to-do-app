@@ -2,23 +2,34 @@
 import React, { useState } from 'react'
 import ToDoForm from '../../organisms/to-do-form'
 import ToDoBoard from '../../organisms/to-do-board'
-import { Button } from '@mui/material'
+import { Fab } from '@mui/material'
 
 const ToDoList = () => {
     const [formOpen, setFormOpen] = useState(false)
 
-    const handleCloseForm = () => {
+    const toggleCloseForm = () => {
         setFormOpen(!formOpen)
     }
 
     return (
         <>
-            <Button onClick={handleCloseForm}>Create Task</Button>
             <ToDoForm
                 open={formOpen}
-                onClose={handleCloseForm}
+                onClose={toggleCloseForm}
             />
             <ToDoBoard />
+            <Fab
+                variant="extended"
+                sx={{
+                    position: 'absolute',
+                    bottom: 32,
+                    right: 32
+                }}
+                color="primary"
+                onClick={toggleCloseForm}
+            >
+                Create a new task
+            </Fab>
         </>
     )
 }
