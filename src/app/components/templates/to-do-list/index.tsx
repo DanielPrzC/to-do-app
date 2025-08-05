@@ -1,24 +1,36 @@
 'use client'
 import React, { useState } from 'react'
 import ToDoForm from '../../organisms/to-do-form'
-import { Task } from '@/app/types/types.d'
-import { Button } from '@mui/material'
+import ToDoBoard from '../../organisms/to-do-board'
+import { Fab } from '@mui/material'
 
 const ToDoList = () => {
     const [formOpen, setFormOpen] = useState(false)
-    const handleCreate = (task: Task) => {
-        console.log("🚀 ~ handleCreate ~ task:", task)
+
+    const toggleCloseForm = () => {
+        setFormOpen(!formOpen)
     }
 
     return (
-        <div>
-            <Button onClick={() => setFormOpen(!formOpen)}>Create Task</Button>
+        <>
             <ToDoForm
                 open={formOpen}
-                onClose={() => setFormOpen(!formOpen)}
-                onCreate={handleCreate}
+                onClose={toggleCloseForm}
             />
-        </div>
+            <ToDoBoard />
+            <Fab
+                variant="extended"
+                sx={{
+                    position: 'absolute',
+                    bottom: 32,
+                    right: 32
+                }}
+                color="primary"
+                onClick={toggleCloseForm}
+            >
+                Create a new task
+            </Fab>
+        </>
     )
 }
 

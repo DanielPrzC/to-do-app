@@ -1,26 +1,22 @@
 'use client'
 import React, { ChangeEvent, Dispatch, FC, FormEvent, SetStateAction, useState } from 'react'
-import Button from '@mui/material/Button'
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
-import TextField from '@mui/material/TextField'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material'
 import { Task } from '@/app/types/types.d'
+import { useTodoStore } from '@/app/store/use-to-do-store'
 
 export interface IToDoForm {
     open: boolean
     onClose: Dispatch<SetStateAction<boolean>>
-    onCreate: (task: Task) => void
 }
 
-const ToDoForm: FC<IToDoForm> = ({ open, onClose, onCreate }) => {
+const ToDoForm: FC<IToDoForm> = ({ open, onClose }) => {
     const [task, setTask] = useState<Task>({
         title: '',
         description: '',
         isComplete: false
     })
     const [formError, setFormError] = useState(false)
+    const addToDo = useTodoStore((state) => state.addToDo);
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setTask({
@@ -44,7 +40,7 @@ const ToDoForm: FC<IToDoForm> = ({ open, onClose, onCreate }) => {
             return
         }
 
-        onCreate(task)
+        addToDo(task)
 
         handleClearForm()
     }
@@ -53,7 +49,6 @@ const ToDoForm: FC<IToDoForm> = ({ open, onClose, onCreate }) => {
         <Dialog
             open={open}
             onClose={handleClearForm}
-            maxWidth="lg"
         >
             <DialogTitle>
                 Create a new task
